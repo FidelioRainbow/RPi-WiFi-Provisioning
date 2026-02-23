@@ -6,6 +6,7 @@
 
 import NetworkManager
 import uuid, os, sys, time, socket
+import dbus
 
 # This is needed to work with NetworkManager 1.30.6 and python-networkmanager 2.2      
 from dbus.mainloop.glib import DBusGMainLoop
@@ -86,9 +87,31 @@ def get_list_of_access_points():
 
     ssids = [] # list we return
 
-    for dev in NetworkManager.NetworkManager.GetDevices():
-        if dev.DeviceType != NetworkManager.NM_DEVICE_TYPE_WIFI:
+    bus = dbus.SystemBus()
+    nm = bus.get_object("org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager")
+    iface = dbus.Interface(nm, "org.freedesktop.NetworkManager")
+
+    device_paths = iface.GetDevices()
+
+    wifi_paths = []
+    for path in device_paths:
+        dev_obj = bus.get_object("org.freedesktop.NetworkManager", path)
+        props = dbus.Interface(dev_obj, "org.freedesktop.DBus.Properties")
+        dtype = props.Get("org.freedesktop.NetworkManager.Device", "DeviceType")
+
+        if dtype == 2:
+            wifi_paths.append(path)
+
+    wifi_devices = []
+    for path in wifi_paths:
+        try:
+            wifi_devices.append(NetworkManager.Device(path))
+        except Exception as e:
             continue
+
+    for dev in wifi_devices:
+        #if dev.DeviceType != NetworkManager.NM_DEVICE_TYPE_WIFI:
+        #    continue
         for ap in dev.GetAccessPoints():
 
             # Get Flags, WpaFlags and RsnFlags, all are bit OR'd combinations 
@@ -285,33 +308,38 @@ def connect_to_AP(conn_type=None, conn_name=GENERIC_CONNECTION_NAME, \
         connections = dict([(x.GetSettings()['connection']['id'], x) for x in connections])
         conn = connections[conn_name]
 
-        # Find a suitable device
-        ctype = conn.GetSettings()['connection']['type']
-        dtype = {'802-11-wireless': NetworkManager.NM_DEVICE_TYPE_WIFI}.get(ctype,ctype)
-        devices = NetworkManager.NetworkManager.GetDevices()
+        bus = dbus.SystemBus()
+        nm = bus.get_object("org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager")
+        iface = dbus.Interface(nm, "org.freedesktop.NetworkManager")
 
-        for dev in devices:
-            if dev.DeviceType == dtype:
+        device_paths = iface.GetDevices()
+
+        wifi_path = None
+        for path in device_paths:
+            dev_obj = bus.get_object("org.freedesktop.NetworkManager", path)
+            props = dbus.Interface(dev_obj, "org.freedesktop.DBus.Properties")
+            iface_name = props.Get("org.freedesktop.NetworkManager.Device", "Interface")
+
+            if iface_name == "wlan0":
+                wifi_path = path
                 break
-        else:
-            print(f"connect_to_AP() Error: No suitable and available {ctype} device found.")
-            return False
 
         # And connect
-        NetworkManager.NetworkManager.ActivateConnection(conn, dev, "/")
+        wifi_dev = NetworkManager.Device(wifi_path)
+        NetworkManager.NetworkManager.ActivateConnection(conn, wifi_dev, "/")
         print(f"Activated connection={conn_name}.")
 
         # Wait for ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
         print(f'Waiting for connection to become active...')
         loop_count = 0
-        while dev.State != NetworkManager.NM_DEVICE_STATE_ACTIVATED:
+        while wifi_dev.State != NetworkManager.NM_DEVICE_STATE_ACTIVATED:
             #print(f'dev.State={dev.State}')
             time.sleep(1)
             loop_count += 1
             if loop_count > 30: # only wait 30 seconds max
                 break
 
-        if dev.State == NetworkManager.NM_DEVICE_STATE_ACTIVATED:
+        if wifi_dev.State == NetworkManager.NM_DEVICE_STATE_ACTIVATED:
             print(f'Connection {conn_name} is live.')
             return True
 
@@ -320,7 +348,3 @@ def connect_to_AP(conn_type=None, conn_name=GENERIC_CONNECTION_NAME, \
 
     print(f'Connection {conn_name} failed.')
     return False
-
-
-
-
