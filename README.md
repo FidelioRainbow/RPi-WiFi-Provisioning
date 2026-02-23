@@ -1,10 +1,10 @@
-# RPi-WiFi-Provisioning
+# RPi WiFi Provisioning
 Python 3 script to help Raspberry Pi Zero W/ 2W join a WiFi network.
 
 # Install and Run
 Install using `crontab -e` on the command line. Add the following line at the end of the file, save and reboot.
 
-`@reboot sleep 10 && sudo python [path to script]/src/http_server.py -u [path to script]/ui $*`
+<pre><code>@reboot sleep 10 && sudo python <i>[path to script]</i>/src/http_server.py -u </i>[path to script]</i>/ui $*</code></pre>
 
 Run the following command to test the script:
 
