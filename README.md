@@ -8,7 +8,7 @@ Install using `crontab -e` on the command line. Add the following line at the en
 
 Run the following command to test the script:
 
->sudo python _[path to script]_/src/http_server.py
+'sudo python _[path to script]_/src/http_server.py'
 
 # How it works
 
