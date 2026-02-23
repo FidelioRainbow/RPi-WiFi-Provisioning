@@ -24,7 +24,7 @@ Run the following command to test the script:
 
 # How it works
 
-NetworkManager must be the active network manager on the device's host OS.
+NetworkManager must be the active network manager on the device's host OS. Network connection files are stored in `/etc/NetworkManager`.
 
 ### 1. No valid WiFi network
 
