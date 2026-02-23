@@ -3,15 +3,15 @@ Python 3 script to help Raspberry Pi Zero W/ 2W join a WiFi network. Tested on *
 
 First install NetworkManager Python 3 wrapper:
 
-`sudo apt install python3-networkmanager`
+`$ sudo apt install python3-networkmanager`
 
 Download the repository archive:
 
-`wget https://github.com/FidelioRainbow/RPi-WiFi-Provisioning/archive/refs/heads/master.zip`
+`$ wget https://github.com/FidelioRainbow/RPi-WiFi-Provisioning/archive/refs/heads/master.zip`
 
 Unzip the archive:
 
-`unzip RPi-WiFi-Provisioning-master.zip`
+`$ unzip RPi-WiFi-Provisioning-master.zip`
 
 # Install and Run
 Install using `crontab -e` on the command line. Add the following line at the end of the file, save and reboot.
