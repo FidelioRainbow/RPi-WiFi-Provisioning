@@ -2,13 +2,13 @@
 Python 3 script to help Raspberry Pi Zero W/ 2W join a WiFi network.
 
 # Install and Run
-Install using crontab -e on the command line. Add the following line at the end of the file, save and reboot.
+Install using `crontab -e` on the command line. Add the following line at the end of the file, save and reboot.
 
-@reboot sleep 15 && /home/pi/wifi-connect-headless-rpi/scripts/run.sh
+`@reboot sleep 15 && /home/pi/wifi-connect-headless-rpi/scripts/run.sh`
 
 Run the following command to test the script:
 
-sudo python /home/pi/wifi-connect-headless-rpi/src/http_server.py
+`sudo python /home/pi/wifi-connect-headless-rpi/src/http_server.py`
 
 # How it works
 
