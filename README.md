@@ -56,11 +56,11 @@ When the network credentials have been entered, WiFi Connect will disable the ac
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-<pre><code>
+<sub>
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, version 3 of the License.
 
  For more information on this, and how to apply and follow the GNU GPL,
  see <https://www.gnu.org/licenses/>. 
-</code></pre>
+</sub>
