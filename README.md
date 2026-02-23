@@ -1,5 +1,6 @@
 # RPi WiFi Provisioning
 Python 3 script to help Raspberry Pi Zero W/ 2W join a WiFi network.
+
 Tested on *Bookworm* Raspberry Pi OS with no desktop environment.
 
 First install NetworkManager Python wrapper:
