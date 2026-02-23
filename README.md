@@ -1,5 +1,5 @@
 # RPi WiFi Provisioning
-Python 3 script to help Raspberry Pi Zero W/ 2W join a WiFi network.
+Python 3 script to help Raspberry Pi Zero W/ 2W join a WiFi network. Tested on *Bookworm*.
 
 # Install and Run
 Install using `crontab -e` on the command line. Add the following line at the end of the file, save and reboot.
@@ -12,7 +12,7 @@ Run the following command to test the script:
 
 # How it works
 
-NetworkManager should be the active network manager on the device's host OS.
+NetworkManager must be the active network manager on the device's host OS.
 
 ### 1. No valid WiFi network
 
