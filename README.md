@@ -52,14 +52,15 @@ The captive portal provides the option to select a WiFi SSID from a list with de
 
 When the network credentials have been entered, WiFi Connect will disable the access point and try to connect to the network. If the connection fails, it will enable the access point for another attempt. If it succeeds, the configuration will be saved by NetworkManager.
 
-License
+# License
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-
+<pre><code>
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, version 3 of the License.
 
  For more information on this, and how to apply and follow the GNU GPL,
- see <https://www.gnu.org/licenses/>.
+ see <https://www.gnu.org/licenses/>. 
+</code></pre>
