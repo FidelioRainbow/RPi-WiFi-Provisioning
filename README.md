@@ -52,6 +52,12 @@ The captive portal provides the option to select a WiFi SSID from a list with de
 
 When the network credentials have been entered, WiFi Connect will disable the access point and try to connect to the network. If the connection fails, it will enable the access point for another attempt. If it succeeds, the configuration will be saved by NetworkManager.
 
+# AI
+
+![GitHub Copilot](https://img.shields.io/badge/Powered%20by-Copilot-blue?logo=github)
+
+*Parts of this code were developed with assistance from **Copilot AI.***
+
 # License
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
